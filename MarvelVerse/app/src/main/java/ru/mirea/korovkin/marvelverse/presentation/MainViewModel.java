@@ -21,7 +21,9 @@ import ru.mirea.korovkin.marvelverse.domain.usecases.GetFavoriteMoviesUseCase;
 import ru.mirea.korovkin.marvelverse.domain.usecases.GetMovieDetailsUseCase;
 import ru.mirea.korovkin.marvelverse.domain.usecases.GetMoviesListUseCase;
 
-// Мост между MainActivity и domain-слоем (практика 3): Activity сюда не лезет напрямую
+// Практика 6: теперь это общая ViewModel на Activity — её берут MovieListFragment и MovieDetailsFragment
+// (scope requireActivity()), через selectedMovie список передаёт фильм в детали.
+// Мост между экраном и domain-слоем (практика 3): экран сюда не лезет напрямую
 // в репозитории/use-case'ы, а только вызывает методы ниже и слушает LiveData.
 // Переживает поворот экрана (в отличие от Activity) — см. ViewModelFactory, как её создают.
 // Практика 5: всё, что ходит в сеть, гоняю в фоновом потоке, результат — через postValue.
@@ -45,6 +47,8 @@ public class MainViewModel extends ViewModel {
     private final MutableLiveData<ClientInfo> clientInfo = new MutableLiveData<>();
     // текст ошибки сети для экрана; null = ошибки нет
     private final MutableLiveData<String> error = new MutableLiveData<>();
+    // практика 6: фильм, по которому кликнули в списке, — его показывает MovieDetailsFragment
+    private final MutableLiveData<Movie> selectedMovie = new MutableLiveData<>();
     // Отдельная LiveData, которая сама следит за movies и favorites и пересчитывает
     // общий статус — про неё пункт 3 контрольного задания (MediatorLiveData).
     private final MediatorLiveData<String> combinedStatus = new MediatorLiveData<>();
@@ -94,6 +98,15 @@ public class MainViewModel extends ViewModel {
 
     public LiveData<String> getCombinedStatus() {
         return combinedStatus;
+    }
+
+    public LiveData<Movie> getSelectedMovie() {
+        return selectedMovie;
+    }
+
+    // список кладёт сюда фильм перед переходом на детали (главный поток → setValue)
+    public void selectMovie(Movie movie) {
+        selectedMovie.setValue(movie);
     }
 
     // Ниже — методы, которые Activity дёргает по своей инициативе (клик, onCreate и т.д.).

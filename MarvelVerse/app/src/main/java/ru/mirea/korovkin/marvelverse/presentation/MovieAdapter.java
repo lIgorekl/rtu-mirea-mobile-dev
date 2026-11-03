@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,12 +18,22 @@ import ru.mirea.korovkin.marvelverse.R;
 import ru.mirea.korovkin.marvelverse.domain.models.Movie;
 
 // Адаптер для списка фильмов на главном экране (практика 4, постеры через Glide — практика 5).
-// Сам данные не грузит — их сюда кладёт MainActivity через setItems(), когда приходит LiveData.
+// Сам данные не грузит — их сюда кладёт MovieListFragment через setItems(), когда приходит LiveData.
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
+    // практика 6: клик по карточке отдаю наружу (фрагмент откроет детали), сам адаптер никуда не ходит
+    public interface OnMovieClickListener {
+        void onMovieClick(Movie movie);
+    }
+
+    private final OnMovieClickListener clickListener;
     private List<Movie> movies = new ArrayList<>();
 
-    // Вызывается из observe() в MainActivity: подменили список и сказали ленте перерисоваться.
+    public MovieAdapter(OnMovieClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    // Вызывается из observe() в MovieListFragment: подменили список и сказали ленте перерисоваться.
     public void setItems(List<Movie> newMovies) {
         this.movies = newMovies;
         notifyDataSetChanged();
@@ -42,7 +51,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     // Лента просит заполнить карточку фильмом под номером position.
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        holder.bind(movies.get(position));
+        holder.bind(movies.get(position), clickListener);
     }
 
     // Сколько всего элементов в списке.
@@ -66,7 +75,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             overviewText = itemView.findViewById(R.id.overviewText);
         }
 
-        void bind(Movie movie) {
+        void bind(Movie movie, OnMovieClickListener clickListener) {
             titleText.setText(movie.getTitle());
             releaseText.setText("Дата выхода: " + movie.getReleaseDate());
             overviewText.setText(movie.getOverview());
@@ -79,8 +88,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                     .centerCrop()
                     .into(posterImage);
 
-            itemView.setOnClickListener(v ->
-                    Toast.makeText(v.getContext(), "Выбран: " + movie.getTitle(), Toast.LENGTH_SHORT).show());
+            // раньше тут был тост, теперь — переход на детали через фрагмент
+            itemView.setOnClickListener(v -> clickListener.onMovieClick(movie));
         }
     }
 }

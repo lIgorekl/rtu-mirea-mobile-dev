@@ -6,27 +6,38 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import ru.mirea.korovkin.marvelverse.data.repository.AuthRepositoryImpl;
 import ru.mirea.korovkin.marvelverse.data.repository.RepositoryFactory;
 import ru.mirea.korovkin.marvelverse.domain.repository.ClientInfoRepository;
 import ru.mirea.korovkin.marvelverse.domain.repository.MovieRepository;
 
 // У MainViewModel конструктор с параметрами, а стандартный ViewModelProvider умеет
 // создавать только через пустой конструктор — поэтому нужна своя Factory.
-// Она же единственное место в presentation, которое обращается к RepositoryFactory.
+// Практика 6: умеет делать две ViewModel — MainViewModel (список/детали) и ProfileViewModel.
+// AuthRepositoryImpl создаю тут так же, как раньше в AuthActivity.
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
     private final Context context;
 
+    // applicationContext — чтобы фабрика (и репозитории) не держали фрагмент/Activity
     public ViewModelFactory(Context context) {
-        this.context = context;
+        this.context = context.getApplicationContext();
     }
 
     @NonNull
     @Override
     @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        MovieRepository movieRepository = RepositoryFactory.createMovieRepository(context);
         ClientInfoRepository clientInfoRepository = RepositoryFactory.createClientInfoRepository(context);
-        return (T) new MainViewModel(movieRepository, clientInfoRepository);
+        // смотрю, какую ViewModel просят
+        if (modelClass.isAssignableFrom(MainViewModel.class)) {
+            MovieRepository movieRepository = RepositoryFactory.createMovieRepository(context);
+            return (T) new MainViewModel(movieRepository, clientInfoRepository);
+        }
+        if (modelClass.isAssignableFrom(ProfileViewModel.class)) {
+            return (T) new ProfileViewModel(new AuthRepositoryImpl(), clientInfoRepository);
+        }
+        // забыл добавить ветку под новую ViewModel — упадёт сразу и понятно
+        throw new IllegalArgumentException("Unknown ViewModel: " + modelClass.getName());
     }
 }

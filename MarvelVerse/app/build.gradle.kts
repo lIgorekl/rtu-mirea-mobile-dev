@@ -36,6 +36,7 @@ dependencies {
     implementation(libs.recyclerview)
     implementation(libs.cardview)
     implementation(libs.glide)
+    implementation(libs.fragment)
     implementation(project(":2_data"))
     implementation(project(":2_domain"))
     implementation(libs.lifecycle.viewmodel)
