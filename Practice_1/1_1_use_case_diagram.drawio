@@ -1,0 +1,145 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Use Case Diagram" id="usecase1">
+    <mxGraphModel dx="2673" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="actor_auth" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#fff2cc;strokeColor=#d6b656;" value="Авторизованный пользователь" vertex="1">
+          <mxGeometry height="80" width="40" x="30" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_guest" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#fff2cc;strokeColor=#d6b656;" value="Гость" vertex="1">
+          <mxGeometry height="80" width="40" x="30" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_auth" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=6;spacingTop=4;fillColor=none;strokeColor=#666666;fontSize=12;fontStyle=1;" value="Авторизация" vertex="1">
+          <mxGeometry height="320" width="280" x="160" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_register" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Зарегистрироваться" vertex="1">
+          <mxGeometry height="60" width="220" x="190" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_login" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Войти в приложение" vertex="1">
+          <mxGeometry height="60" width="220" x="190" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_logout" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Выйти из аккаунта" vertex="1">
+          <mxGeometry height="60" width="220" x="190" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_catalog" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=6;spacingTop=4;fillColor=none;strokeColor=#666666;fontSize=12;fontStyle=1;" value="Каталог фильмов Marvel" vertex="1">
+          <mxGeometry height="362" width="320" x="520" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_list" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Просмотреть список фильмов" vertex="1">
+          <mxGeometry height="60" width="260" x="550" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_search" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Найти фильм по названию" vertex="1">
+          <mxGeometry height="60" width="260" x="550" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_details" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Просмотреть детали фильма" vertex="1">
+          <mxGeometry height="60" width="260" x="550" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_tmdb" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Получить данные из TMDB API" vertex="1">
+          <mxGeometry height="60" width="260" x="920" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_fav" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=6;spacingTop=4;fillColor=none;strokeColor=#666666;fontSize=12;fontStyle=1;" value="Избранное" vertex="1">
+          <mxGeometry height="320" width="280" x="160" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_add_fav" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Добавить фильм в избранное" vertex="1">
+          <mxGeometry height="60" width="220" x="190" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_view_fav" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Просмотреть избранное" vertex="1">
+          <mxGeometry height="60" width="220" x="190" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_remove_fav" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Удалить фильм из избранного" vertex="1">
+          <mxGeometry height="60" width="220" x="190" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_db" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Локальная база данных (Room)" vertex="1">
+          <mxGeometry height="60" width="260" x="520" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_profile" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=6;spacingTop=4;fillColor=none;strokeColor=#666666;fontSize=12;fontStyle=1;" value="Профиль" vertex="1">
+          <mxGeometry height="220" width="320" x="880" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_profile" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Просмотреть профиль" vertex="1">
+          <mxGeometry height="60" width="260" x="910" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_mask" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Сделать фото с маской супергероя" vertex="1">
+          <mxGeometry height="60" width="260" x="910" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_tflite" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Распознать лицо (TensorFlow Lite)" vertex="1">
+          <mxGeometry height="60" width="320" x="880" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gen" edge="1" parent="1" source="actor_auth" style="endArrow=block;endFill=0;html=1;" target="actor_guest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="actor_guest" style="endArrow=none;html=1;" target="uc_register">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="actor_guest" style="endArrow=none;html=1;" target="uc_login">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="actor_auth" style="endArrow=none;html=1;" target="uc_logout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="actor_guest" style="endArrow=none;html=1;" target="uc_list">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="actor_guest" style="endArrow=none;html=1;" target="uc_details">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="uc_search" style="endArrow=block;dashed=1;html=1;fontSize=11;" target="uc_list" value="«extend»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="uc_list" style="endArrow=block;dashed=1;html=1;fontSize=11;" target="uc_tmdb" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="uc_details" style="endArrow=block;dashed=1;html=1;fontSize=11;" target="uc_tmdb" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="actor_auth" style="endArrow=none;html=1;" target="uc_add_fav">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="actor_auth" style="endArrow=none;html=1;" target="uc_view_fav">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="actor_auth" style="endArrow=none;html=1;" target="uc_remove_fav">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="uc_add_fav" style="endArrow=block;dashed=1;html=1;fontSize=11;" target="uc_db" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="uc_view_fav" style="endArrow=block;dashed=1;html=1;fontSize=11;" target="uc_db" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="uc_remove_fav" style="endArrow=block;dashed=1;html=1;fontSize=11;" target="uc_db" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="actor_auth" style="endArrow=none;html=1;" target="uc_profile">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="actor_auth" style="endArrow=none;html=1;" target="uc_mask">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="uc_mask" style="endArrow=block;dashed=1;html=1;fontSize=11;" target="uc_tflite" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;" value="п.1 — Авторизация" vertex="1">
+          <mxGeometry height="24" width="280" x="160" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="note2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;" value="п.2 — Внешний сервис (JSON)" vertex="1">
+          <mxGeometry height="24" width="260" x="920" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="note3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;" value="п.3 — Сохранение данных в БД" vertex="1">
+          <mxGeometry height="24" width="260" x="520" y="528" as="geometry" />
+        </mxCell>
+        <mxCell id="note4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;" value="п.4 — Список сущностей с изображениями" vertex="1">
+          <mxGeometry height="22" width="260" x="550" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="note5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;" value="п.5 — Страница сущности" vertex="1">
+          <mxGeometry height="22" width="260" x="550" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="note6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;" value="п.6 — Гость: только каталог. Авторизованный: + Избранное, Профиль, Маска" vertex="1">
+          <mxGeometry height="36" width="280" x="160" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="note7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=2;align=center;verticalAlign=middle;" value="п.7 — TensorFlow Lite (распознавание / маска)" vertex="1">
+          <mxGeometry height="24" width="320" x="880" y="770" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
