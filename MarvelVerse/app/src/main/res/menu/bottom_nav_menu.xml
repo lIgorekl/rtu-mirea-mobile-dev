@@ -9,6 +9,11 @@
         android:id="@+id/favoritesFragment"
         android:icon="@drawable/ic_nav_favorites"
         android:title="Избранное" />
+    <!-- практика 8 -->
+    <item
+        android:id="@+id/heroMaskFragment"
+        android:icon="@drawable/ic_nav_mask"
+        android:title="Маска" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_nav_profile"

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- практика 8: FileProvider раздаёт камере только папку cache/photos (туда пишется снимок) -->
+<paths>
+    <cache-path
+        name="photos"
+        path="photos/" />
+</paths>

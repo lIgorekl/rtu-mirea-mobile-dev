@@ -20,7 +20,7 @@ import ru.mirea.korovkin.marvelverse.databinding.ActivityMainBinding;
 
 // Практика 7: Activity всё ещё просто хост, но ручных транзакций FragmentManager'а больше нет.
 // Экраны и переходы описаны в res/navigation/nav_graph.xml, меняет их NavHostFragment,
-// а командует NavController. Внизу BottomNavigationView: Фильмы / Избранное / Профиль.
+// а командует NavController. Внизу BottomNavigationView: Фильмы / Избранное / Маска / Профиль.
 // Интерфейс Navigator из практики 6 убрал — фрагменты сами зовут findNavController().navigate(...)
 public class MainActivity extends AppCompatActivity {
 
@@ -54,11 +54,12 @@ public class MainActivity extends AppCompatActivity {
                 .findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
 
-        // три вкладки — экраны верхнего уровня: на них нет стрелки Up,
+        // вкладки — экраны верхнего уровня (практика 8: + "Маска", их стало четыре): на них нет стрелки Up,
         // а на деталях и входе она появится сама
         appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.movieListFragment,
                 R.id.favoritesFragment,
+                R.id.heroMaskFragment,
                 R.id.profileFragment)
                 .build();
         // заголовок тулбара берётся из android:label пункта графа

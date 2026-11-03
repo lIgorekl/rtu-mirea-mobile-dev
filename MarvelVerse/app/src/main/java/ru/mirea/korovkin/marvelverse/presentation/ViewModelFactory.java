@@ -16,6 +16,7 @@ import ru.mirea.korovkin.marvelverse.domain.repository.MovieRepository;
 // Практика 6: умеет делать две ViewModel — MainViewModel (список/детали) и ProfileViewModel.
 // AuthRepositoryImpl создаю тут так же, как раньше в AuthActivity.
 // Практика 7: MainViewModel тоже получает AuthRepository — избранное только для вошедших.
+// Практика 8: + HeroMaskViewModel (распознавание лица для маски).
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
     private final Context context;
@@ -37,6 +38,11 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         }
         if (modelClass.isAssignableFrom(ProfileViewModel.class)) {
             return (T) new ProfileViewModel(new AuthRepositoryImpl(), clientInfoRepository);
+        }
+        // практика 8: вкладка "Маска" — модель распознавания лиц + проверка, вошёл ли юзер
+        if (modelClass.isAssignableFrom(HeroMaskViewModel.class)) {
+            return (T) new HeroMaskViewModel(
+                    RepositoryFactory.createFaceRecognitionRepository(context), new AuthRepositoryImpl());
         }
         // забыл добавить ветку под новую ViewModel — упадёт сразу и понятно
         throw new IllegalArgumentException("Unknown ViewModel: " + modelClass.getName());

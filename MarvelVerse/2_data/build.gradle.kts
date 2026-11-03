@@ -39,5 +39,7 @@ dependencies {
     annotationProcessor(libs.room.compiler)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    // практика 8: MediaPipe Tasks Vision — запускает TFLite-модель BlazeFace (FaceDetector)
+    implementation(libs.mediapipe.tasks.vision)
     testImplementation(libs.junit)
 }

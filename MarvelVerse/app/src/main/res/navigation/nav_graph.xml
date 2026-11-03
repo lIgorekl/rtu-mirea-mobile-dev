@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- практика 7: граф навигации MarvelVerse.
-     вкладки (меню снизу): список, избранное, профиль. детали и вход открываются action'ами -->
+     вкладки (меню снизу): список, избранное, маска (практика 8), профиль. детали и вход открываются action'ами -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -39,6 +39,17 @@
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profile_to_auth"
+            app:destination="@id/authFragment" />
+    </fragment>
+
+    <!-- практика 8: маска супергероя (TFLite). гость жмёт "Войти" прямо тут -->
+    <fragment
+        android:id="@+id/heroMaskFragment"
+        android:name="ru.mirea.korovkin.marvelverse.presentation.HeroMaskFragment"
+        android:label="Маска супергероя"
+        tools:layout="@layout/fragment_hero_mask">
+        <action
+            android:id="@+id/action_heroMask_to_auth"
             app:destination="@id/authFragment" />
     </fragment>
 

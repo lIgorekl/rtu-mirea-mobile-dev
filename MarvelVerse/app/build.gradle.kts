@@ -45,6 +45,8 @@ dependencies {
     // практика 7: Navigation Component (NavHostFragment, граф, NavController) + NavigationUI для нижнего меню
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    // практика 8: поворот фото с камеры по EXIF (PhotoDecoder)
+    implementation(libs.exifinterface)
     implementation(project(":2_data"))
     implementation(project(":2_domain"))
     implementation(libs.lifecycle.viewmodel)
