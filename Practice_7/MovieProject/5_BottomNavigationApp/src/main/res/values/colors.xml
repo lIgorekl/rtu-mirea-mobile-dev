@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- своя гамма FitStep: зелёный "спортивный" + светло-салатовый для подсветки вкладки -->
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="fit_green">#FF2E7D32</color>
+    <color name="fit_green_dark">#FF1B5E20</color>
+    <color name="fit_green_light">#FFC8E6C9</color>
+    <color name="fit_lime">#FFAEEA00</color>
+    <color name="fit_grey">#FF757575</color>
+</resources>

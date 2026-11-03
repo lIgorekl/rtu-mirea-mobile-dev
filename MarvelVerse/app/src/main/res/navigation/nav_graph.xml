@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- практика 7: граф навигации MarvelVerse.
+     вкладки (меню снизу): список, избранное, профиль. детали и вход открываются action'ами -->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/movieListFragment">
+
+    <!-- стартовый экран: с него "назад" = выход из приложения -->
+    <fragment
+        android:id="@+id/movieListFragment"
+        android:name="ru.mirea.korovkin.marvelverse.presentation.MovieListFragment"
+        android:label="Фильмы MCU"
+        tools:layout="@layout/fragment_movie_list">
+        <action
+            android:id="@+id/action_movieList_to_movieDetails"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="ru.mirea.korovkin.marvelverse.presentation.FavoritesFragment"
+        android:label="Избранное"
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favorites_to_movieDetails"
+            app:destination="@id/movieDetailsFragment" />
+        <!-- гость жмёт "Войти" прямо на вкладке избранного -->
+        <action
+            android:id="@+id/action_favorites_to_auth"
+            app:destination="@id/authFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ru.mirea.korovkin.marvelverse.presentation.ProfileFragment"
+        android:label="Профиль"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profile_to_auth"
+            app:destination="@id/authFragment" />
+    </fragment>
+
+    <!-- фильм не передаю аргументом — он уже лежит в MainViewModel.selectedMovie -->
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="ru.mirea.korovkin.marvelverse.presentation.MovieDetailsFragment"
+        android:label="О фильме"
+        tools:layout="@layout/fragment_movie_details" />
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="ru.mirea.korovkin.marvelverse.presentation.AuthFragment"
+        android:label="Вход"
+        tools:layout="@layout/fragment_auth" />
+</navigation>

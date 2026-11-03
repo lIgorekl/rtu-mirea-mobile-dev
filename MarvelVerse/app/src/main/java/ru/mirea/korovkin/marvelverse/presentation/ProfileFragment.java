@@ -1,6 +1,5 @@
 package ru.mirea.korovkin.marvelverse.presentation;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import ru.mirea.korovkin.marvelverse.R;
 import ru.mirea.korovkin.marvelverse.domain.models.ClientInfo;
@@ -19,20 +19,11 @@ import ru.mirea.korovkin.marvelverse.domain.models.User;
 
 // Практика 6: экран "Профиль", собирается из данных авторизации.
 // Гость — "?" и кнопка входа, залогиненный — email/uid и кнопка выхода.
+// Практика 7: теперь это вкладка нижнего меню (верхний экран графа) — кнопку "Назад" убрал,
+// на вход иду по action_profile_to_auth через NavController.
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel vm;
-    private Navigator navigator;
-
-    // Activity = Navigator
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (!(context instanceof Navigator)) {
-            throw new ClassCastException(context + " must implement Navigator");
-        }
-        navigator = (Navigator) context;
-    }
 
     // ViewModel тут своя (scope = this), профиль ни с кем данные не делит
     @Override
@@ -85,9 +76,10 @@ public class ProfileFragment extends Fragment {
                 cachedText.setText("Последний вход (SharedPreferences): "
                         + (info != null ? info.getEmail() : "нет данных")));
 
-        loginButton.setOnClickListener(v -> navigator.openAuth());
+        // вход — отдельный экран графа, после него popBackStack вернёт сюда
+        loginButton.setOnClickListener(v -> NavHostFragment.findNavController(this)
+                .navigate(R.id.action_profile_to_auth));
         logoutButton.setOnClickListener(v -> vm.logout());
-        view.findViewById(R.id.backButton).setOnClickListener(v -> navigator.goBack());
     }
 
     // каждый раз при показе перечитываю — после возврата со входа экран обновится сам
@@ -95,11 +87,5 @@ public class ProfileFragment extends Fragment {
     public void onResume() {
         super.onResume();
         vm.loadProfile();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        navigator = null;
     }
 }

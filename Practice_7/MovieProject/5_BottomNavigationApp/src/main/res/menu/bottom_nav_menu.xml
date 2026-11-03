@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- три вкладки, id совпадают с id фрагментов в navigation/mobile_navigation.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_today"
+        android:icon="@drawable/ic_today"
+        android:title="@string/title_today" />
+    <item
+        android:id="@+id/navigation_workouts"
+        android:icon="@drawable/ic_workouts"
+        android:title="@string/title_workouts" />
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/title_profile" />
+</menu>

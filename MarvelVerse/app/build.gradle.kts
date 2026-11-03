@@ -19,6 +19,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // практика 7, п.1 методички: View Binding (ActivityMainBinding в MainActivity)
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             optimization {
@@ -37,6 +42,9 @@ dependencies {
     implementation(libs.cardview)
     implementation(libs.glide)
     implementation(libs.fragment)
+    // практика 7: Navigation Component (NavHostFragment, граф, NavController) + NavigationUI для нижнего меню
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     implementation(project(":2_data"))
     implementation(project(":2_domain"))
     implementation(libs.lifecycle.viewmodel)

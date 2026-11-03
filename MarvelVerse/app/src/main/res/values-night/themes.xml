@@ -2,6 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.MarvelVerse" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- практика 7: красный Marvel для тулбара и нижнего меню -->
+        <item name="colorPrimary">@color/marvel_red</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- "пилюля" под активной вкладкой снизу -->
+        <item name="colorSecondaryContainer">@color/marvel_red_dark</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
     </style>
 </resources>

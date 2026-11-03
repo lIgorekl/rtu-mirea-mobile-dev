@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- практика 7: цвета Marvel для навигации -->
+    <color name="marvel_red">#FFB71C1C</color>
+    <color name="marvel_red_dark">#FF7F0000</color>
+    <color name="marvel_red_light">#FFFFCDD2</color>
 </resources>

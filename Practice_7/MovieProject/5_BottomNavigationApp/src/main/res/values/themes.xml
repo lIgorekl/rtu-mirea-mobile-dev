@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- NoActionBar: тулбар свой (MaterialToolbar в activity_main), его ставлю через setSupportActionBar -->
+    <style name="Base.Theme.BottomNavigationApp" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/fit_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/fit_lime</item>
+        <!-- фон "пилюли" под активной иконкой в нижнем меню -->
+        <item name="colorSecondaryContainer">@color/fit_green_light</item>
+        <item name="colorOnSecondaryContainer">@color/fit_green_dark</item>
+        <!-- светлые иконки статус-бара, раз сверху тёмно-зелёный -->
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.BottomNavigationApp" parent="Base.Theme.BottomNavigationApp" />
+</resources>

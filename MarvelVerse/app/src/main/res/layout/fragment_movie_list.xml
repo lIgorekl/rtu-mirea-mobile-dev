@@ -6,26 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MovieListFragment">
 
-    <!-- практика 6: бывший экран MainActivity, теперь это фрагмент списка -->
+    <!-- практика 6: бывший экран MainActivity, теперь это фрагмент списка.
+         практика 7: кнопку "Профиль" убрал — профиль теперь вкладка в нижнем меню -->
 
     <TextView
         android:id="@+id/statusText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
         android:text="Загрузка…"
-        app:layout_constraintBottom_toBottomOf="@id/profileButton"
-        app:layout_constraintEnd_toStartOf="@id/profileButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/profileButton" />
-
-    <Button
-        android:id="@+id/profileButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Профиль"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- практика 5: ошибка сети прямо на экране + кнопка повтора; по умолчанию скрыты -->
@@ -39,7 +31,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileButton"
+        app:layout_constraintTop_toBottomOf="@id/statusText"
         tools:text="Нет связи с сервером"
         tools:visibility="visible" />
 

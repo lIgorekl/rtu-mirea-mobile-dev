@@ -15,6 +15,7 @@ import ru.mirea.korovkin.marvelverse.domain.repository.MovieRepository;
 // создавать только через пустой конструктор — поэтому нужна своя Factory.
 // Практика 6: умеет делать две ViewModel — MainViewModel (список/детали) и ProfileViewModel.
 // AuthRepositoryImpl создаю тут так же, как раньше в AuthActivity.
+// Практика 7: MainViewModel тоже получает AuthRepository — избранное только для вошедших.
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
     private final Context context;
@@ -32,7 +33,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         // смотрю, какую ViewModel просят
         if (modelClass.isAssignableFrom(MainViewModel.class)) {
             MovieRepository movieRepository = RepositoryFactory.createMovieRepository(context);
-            return (T) new MainViewModel(movieRepository, clientInfoRepository);
+            return (T) new MainViewModel(movieRepository, clientInfoRepository, new AuthRepositoryImpl());
         }
         if (modelClass.isAssignableFrom(ProfileViewModel.class)) {
             return (T) new ProfileViewModel(new AuthRepositoryImpl(), clientInfoRepository);

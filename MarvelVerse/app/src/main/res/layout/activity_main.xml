@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- практика 6: Activity теперь просто хост, все экраны — фрагменты в этом контейнере -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- практика 7: тулбар + хост навигации + нижнее меню.
+     фон корня = цвет тулбара, он же виден под статус-баром -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:orientation="vertical"
     tools:context=".presentation.MainActivity">
 
-    <!-- name не ставлю — первый фрагмент кладу транзакцией из onCreate -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainer"
+    <!-- тёмный оверлей: без него стрелка Up от NavigationUI получалась тёмной на красном -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
+        app:navigationIconTint="?attr/colorOnPrimary"
+        app:titleTextColor="?attr/colorOnPrimary" />
 
-</FrameLayout>
+    <!-- NavHostFragment: сюда граф nav_graph подставляет текущий экран.
+         defaultNavHost — системный "назад" сначала идёт по бэк-стеку навигации -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="?android:attr/colorBackground"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
+
+    <!-- id пунктов меню = id пунктов графа, по ним NavigationUI и переключает вкладки -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
+
+</LinearLayout>

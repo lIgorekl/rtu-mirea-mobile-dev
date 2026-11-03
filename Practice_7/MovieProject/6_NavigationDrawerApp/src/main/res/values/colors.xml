@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- своя гамма кофейни: коричневые + сливочный -->
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="coffee_dark">#FF3E2723</color>
+    <color name="coffee_brown">#FF6D4C41</color>
+    <color name="coffee_latte">#FFA1887F</color>
+    <color name="coffee_cream">#FFEFEBE9</color>
+    <color name="coffee_caramel">#FFD7A86E</color>
+</resources>

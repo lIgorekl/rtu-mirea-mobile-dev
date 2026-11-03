@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- шапка, просто текст -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#3F51B5"
+    android:padding="16dp"
+    android:text="Мои дела — Коровкин И."
+    android:textColor="#FFFFFF"
+    android:textSize="20sp"
+    android:textStyle="bold" />

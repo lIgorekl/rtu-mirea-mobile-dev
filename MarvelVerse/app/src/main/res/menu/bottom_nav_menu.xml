@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- нижнее меню, id = id фрагментов в nav_graph.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/movieListFragment"
+        android:icon="@drawable/ic_nav_movies"
+        android:title="Фильмы" />
+    <item
+        android:id="@+id/favoritesFragment"
+        android:icon="@drawable/ic_nav_favorites"
+        android:title="Избранное" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_nav_profile"
+        android:title="Профиль" />
+</menu>

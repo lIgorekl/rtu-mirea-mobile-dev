@@ -1,6 +1,5 @@
 package ru.mirea.korovkin.marvelverse.presentation;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import ru.mirea.korovkin.marvelverse.R;
 import ru.mirea.korovkin.marvelverse.data.repository.AuthRepositoryImpl;
@@ -26,6 +26,8 @@ import ru.mirea.korovkin.marvelverse.domain.usecases.SaveClientInfoUseCase;
 // Практика 6: бывшая AuthActivity, теперь фрагмент (Firebase Auth из практики 2).
 // Логика та же: use-case'ы прямо тут, без ViewModel — в практике 3 переводили только главный экран.
 // Отличие: после входа не finish(), а шаг назад по бэк-стеку — вернусь в профиль.
+// Практика 7: этот шаг назад теперь делает NavController.popBackStack() — вернусь туда,
+// откуда пришёл (профиль или избранное).
 public class AuthFragment extends Fragment {
 
     private EditText emailInput;
@@ -35,18 +37,6 @@ public class AuthFragment extends Fragment {
     private LoginUseCase loginUseCase;
     private RegisterUseCase registerUseCase;
     private SaveClientInfoUseCase saveClientInfoUseCase;
-
-    private Navigator navigator;
-
-    // Activity = Navigator
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (!(context instanceof Navigator)) {
-            throw new ClassCastException(context + " must implement Navigator");
-        }
-        navigator = (Navigator) context;
-    }
 
     // use-case'ы собираю один раз на фрагмент
     @Override
@@ -108,13 +98,13 @@ public class AuthFragment extends Fragment {
         });
     }
 
-    // общий успех: кэш в SharedPreferences, тост и назад в профиль
+    // общий успех: кэш в SharedPreferences, тост и назад (профиль или избранное)
     private void onAuthSuccess(User user, String toastPrefix) {
         // ответ Firebase асинхронный — пока ждали, фрагмент могли уже закрыть
         if (!isAdded()) return;
         saveClientInfoUseCase.execute(new ClientInfo(user.getUid(), user.getEmail()));
         Toast.makeText(requireContext(), toastPrefix + user.getEmail(), Toast.LENGTH_SHORT).show();
-        navigator.goBack();
+        NavHostFragment.findNavController(this).popBackStack();
     }
 
     private void showError(String text) {
@@ -136,11 +126,5 @@ public class AuthFragment extends Fragment {
         emailInput = null;
         passwordInput = null;
         statusText = null;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        navigator = null;
     }
 }

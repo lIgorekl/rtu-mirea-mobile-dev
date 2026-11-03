@@ -1,88 +1,80 @@
 package ru.mirea.korovkin.marvelverse.presentation;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.SystemBarStyle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import ru.mirea.korovkin.marvelverse.R;
+import ru.mirea.korovkin.marvelverse.databinding.ActivityMainBinding;
 
-// Практика 6: Activity теперь только хост. Своего UI почти нет — один контейнер,
-// а экраны (список, детали, профиль, вход) это фрагменты. Сама делает все транзакции
-// FragmentManager'а, фрагменты просят её через интерфейс Navigator.
-public class MainActivity extends AppCompatActivity implements Navigator {
+// Практика 7: Activity всё ещё просто хост, но ручных транзакций FragmentManager'а больше нет.
+// Экраны и переходы описаны в res/navigation/nav_graph.xml, меняет их NavHostFragment,
+// а командует NavController. Внизу BottomNavigationView: Фильмы / Избранное / Профиль.
+// Интерфейс Navigator из практики 6 убрал — фрагменты сами зовут findNavController().navigate(...)
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MarvelVerseCheck";
 
-    // имена записей в бэк-стеке (и теги фрагментов заодно)
-    private static final String TAG_LIST = "movies";
-    private static final String TAG_DETAILS = "details";
-    private static final String TAG_PROFILE = "profile";
-    private static final String TAG_AUTH = "auth";
+    private ActivityMainBinding binding;
+    private NavController navController;
+    private AppBarConfiguration appBarConfiguration;
 
-    // контейнер + первый фрагмент (список)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        // dark() — белые значки статус-бара на красном тулбаре
+        EdgeToEdge.enable(this, SystemBarStyle.dark(Color.TRANSPARENT));
+        // п.1 методички: View Binding вместо findViewById
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        // отступы под статус-бар/навбар — как и раньше, только теперь на контейнере
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        // сверху/по бокам отступ под системные панели, снизу нет —
+        // BottomNavigationView сам поднимется над системной навигацией
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
 
-        FragmentManager fm = getSupportFragmentManager();
-        // просто для логов: сколько записей в бэк-стеке после каждого перехода
-        fm.addOnBackStackChangedListener(() ->
-                Log.d(TAG, "Back stack size: " + fm.getBackStackEntryCount()));
+        setSupportActionBar(binding.toolbar);
 
-        // только при первом запуске — после поворота FragmentManager всё восстановит сам
-        if (savedInstanceState == null) {
-            // корневой экран кладу через add БЕЗ addToBackStack — назад с него = выход из приложения
-            fm.beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragmentContainer, MovieListFragment.class, null, TAG_LIST)
-                    .commit();
-        }
+        // NavController достаю из самого NavHostFragment (с FragmentContainerView так надёжнее)
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
+
+        // три вкладки — экраны верхнего уровня: на них нет стрелки Up,
+        // а на деталях и входе она появится сама
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.movieListFragment,
+                R.id.favoritesFragment,
+                R.id.profileFragment)
+                .build();
+        // заголовок тулбара берётся из android:label пункта графа
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        // клик по вкладке → переход к пункту графа с тем же id (у каждой вкладки свой бэк-стек)
+        NavigationUI.setupWithNavController(binding.bottomNav, navController);
+
+        // вместо "Back stack size" из практики 6 — лог, куда пришли
+        navController.addOnDestinationChangedListener((controller, destination, arguments) ->
+                Log.d(TAG, "Navigation → " + destination.getLabel()));
     }
 
+    // стрелка Up в тулбаре: делает то же, что "назад", но никогда не закрывает приложение
     @Override
-    public void openMovieDetails() {
-        open(MovieDetailsFragment.class, TAG_DETAILS);
-    }
-
-    @Override
-    public void openProfile() {
-        open(ProfileFragment.class, TAG_PROFILE);
-    }
-
-    @Override
-    public void openAuth() {
-        open(AuthFragment.class, TAG_AUTH);
-    }
-
-    // снимаем верхнюю транзакцию — вернётся предыдущий фрагмент
-    @Override
-    public void goBack() {
-        getSupportFragmentManager().popBackStack();
-    }
-
-    // общий переход: replace текущего экрана + запись в бэк-стек,
-    // поэтому системный "назад" вернёт предыдущий фрагмент, а не закроет приложение
-    private void open(Class<? extends Fragment> fragmentClass, String name) {
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.fragmentContainer, fragmentClass, null, name)
-                .addToBackStack(name)
-                .commit();
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 }

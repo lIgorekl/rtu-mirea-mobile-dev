@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">FitStep</string>
+    <string name="title_today">Сегодня</string>
+    <string name="title_workouts">Тренировки</string>
+    <string name="title_profile">Профиль</string>
+</resources>

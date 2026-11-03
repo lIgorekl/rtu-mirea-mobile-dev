@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- сверху статичный фрагмент (через name), снизу контейнер под динамический -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!-- статичный способ: класс фрагмента прямо в разметке -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/headerFragment"
+        android:name="com.mirea.korovkin.fragmentapp.HeaderFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- сюда BlankFragment кладётся транзакцией, name НЕ указываем -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- сюда пишет Activity, когда фрагмент дёрнул FragmentListener -->
+    <TextView
+        android:id="@+id/listenerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E3F2FD"
+        android:padding="16dp"
+        android:text="Activity: пока ничего не пришло"
+        android:textSize="16sp" />
+</LinearLayout>

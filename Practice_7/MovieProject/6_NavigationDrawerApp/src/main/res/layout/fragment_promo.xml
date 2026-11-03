@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- раздел "Акции" -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    tools:context=".PromoFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/coffee_cream"
+        android:padding="16dp"
+        android:text="🎁 Каждый 6-й кофе — в подарок"
+        android:textColor="@color/coffee_dark"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/coffee_cream"
+        android:padding="16dp"
+        android:text="⏰ С 8:00 до 10:00 — капучино за 180 ₽"
+        android:textColor="@color/coffee_dark"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/coffee_cream"
+        android:padding="16dp"
+        android:text="🎓 Студентам −10% по студенческому"
+        android:textColor="@color/coffee_dark"
+        android:textSize="18sp" />
+</LinearLayout>
