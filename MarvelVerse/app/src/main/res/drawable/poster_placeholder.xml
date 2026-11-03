@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- старая иконка-хлопушка с отступом — показывается, пока Glide качает постер -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_movie_placeholder"
+    android:inset="20dp" />
